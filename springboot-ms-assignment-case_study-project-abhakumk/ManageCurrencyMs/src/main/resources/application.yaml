@@ -1,0 +1,51 @@
+server:
+  port: 9011
+  
+spring:
+  h2:
+    console:
+      path: ${h2.console.path:/h2}
+      settings:
+        web-allow-others: true
+  application:
+      name: managecurrms      
+        
+  datasource:
+    url: jdbc:h2:mem:currFactDb;DB_CLOSE_ON_EXIT=FALSE
+    username: sa
+    password: 
+    driver-class-name: org.h2.Driver
+  jpa:
+    show-sql: true
+  sleuth:
+    trace-id128: true
+    sampler:
+      probability: 1.0
+  zipkin:
+    enabled: true
+    base-url: http://192.168.99.100:9411/
+  rabbitmq:
+    host: 192.168.99.100
+    port: 5672
+    
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+  endpoint:
+    health:
+      show-details: ALWAYS   
+      
+eureka:
+   client:
+      serviceUrl:
+         defaultZone: http://192.168.99.100:8761/eureka
+         #defaultZone: http://localhost:8761/eureka
+   instance:
+      instanceId: managecurrms:${random.int}
+      #${server.port}
+      leaseRenewalIntervalInSeconds: 5
+      leaseExpirationDurationInSeconds: 5
+      preferIpAddress: true
+         

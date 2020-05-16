@@ -1,0 +1,34 @@
+server:
+  port: 9002
+   
+
+spring:
+  application:
+    name: convertcurrms
+  sleuth:
+    trace-id128: true
+    sampler:
+      probability: 1.0
+  zipkin:
+    enabled: true
+    base-url: http://192.168.99.100:9411/
+  rabbitmq:
+    host: 192.168.99.100
+    port: 5672
+
+eureka:
+  instance:
+    instanceId: convertcurrms
+    leaseRenewalIntervalInSeconds: 5
+    leaseExpirationDurationInSeconds: 5
+    preferIpAddress: true
+    metadata-map:
+      zone: ZoneA
+  client:
+    registerWithEureka: true
+    fetchRegistry: true
+    prefer-same-zone-eureka: true  
+    serviceUrl:
+      defaultZone: http://192.168.99.100:8761/eureka
+      #defaultZone: http://localhost:8761/eureka
+  
